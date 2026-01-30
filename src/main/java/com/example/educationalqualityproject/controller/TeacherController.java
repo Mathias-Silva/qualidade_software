@@ -36,7 +36,7 @@ public class TeacherController {
     }
 
     @GetMapping("/{id}/edit")
-    public String showUpdateForm(@PathVariable Long id, Model model) {
+    public String showUpdateForm(@PathVariable String id, Model model) {
         Teacher teacher = teacherService.getTeacherById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid teacher Id:" + id));
         model.addAttribute("teacher", teacher);
@@ -44,14 +44,14 @@ public class TeacherController {
     }
 
     @PostMapping("/{id}")
-    public String updateTeacher(@PathVariable Long id, @ModelAttribute Teacher teacher) {
+    public String updateTeacher(@PathVariable String id, @ModelAttribute Teacher teacher) {
         teacher.setId(id);
         teacherService.saveTeacher(teacher);
         return "redirect:/teachers";
     }
 
     @GetMapping("/{id}/delete")
-    public String deleteTeacher(@PathVariable Long id) {
+    public String deleteTeacher(@PathVariable String id) {
         teacherService.deleteTeacher(id);
         return "redirect:/teachers";
     }

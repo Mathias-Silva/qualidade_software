@@ -1,74 +1,96 @@
-# Educational Quality Project
+# Projeto de Qualidade Educacional
 
-This is an educational Java project using Spring Boot and Maven for teaching quality concepts to students. The project implements a simple student and teacher registration system with a basic web interface.
+Este é um projeto educacional em Java usando Spring Boot e Maven para ensinar conceitos de qualidade aos alunos. O projeto implementa um sistema simples de cadastro de alunos e professores com uma interface web básica.
 
-## Features
+## Funcionalidades
 
-- Student registration and management
-- Teacher registration and management
-- Simple web interface using Thymeleaf and Bootstrap
-- H2 in-memory database for easy setup
+- Cadastro e gerenciamento de alunos
+- Cadastro e gerenciamento de professores
+- Interface web simples usando Thymeleaf e Bootstrap
+- Banco de dados MongoDB para armazenamento de documentos
 
-## Technologies Used
+## Tecnologias Utilizadas
 
 - Java 17
 - Spring Boot 3.2.0
 - Maven
-- JPA/Hibernate
+- Spring Data MongoDB
 - Thymeleaf
 - Bootstrap
-- H2 Database
+- Banco de Dados MongoDB
 
-## Getting Started
+## Conexão ao Banco de Dados
 
-### Prerequisites
+Este projeto utiliza um banco de dados MongoDB hospedado remotamente para fins educacionais:
+```
+mongodb://mongo:XdnCdkmKwzJiKHiryTDzdgRGOxzNQYtA@crossover.proxy.rlwy.net:24258
+```
 
-- Java 17 or higher
-- Maven 3.6.0 or higher
+## Começando
 
-### Running the Application
+### Pré-requisitos
 
-1. Clone the repository
-2. Navigate to the project directory
-3. Run the application using Maven:
+- Java 17 ou superior
+- Maven 3.6.0 ou superior
+
+### Executando a Aplicação
+
+1. Clone o repositório
+2. Navegue até o diretório do projeto
+3. Execute a aplicação usando Maven:
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-Or build and run the JAR:
+Ou construa e execute o JAR:
 
 ```bash
 ./mvnw clean package
 java -jar target/educational-quality-project-0.0.1-SNAPSHOT.jar
 ```
 
-### Accessing the Application
+### Acessando a Aplicação
 
-After starting the application, you can access it at:
-- Main page: http://localhost:8080
-- Students page: http://localhost:8080/students
-- Teachers page: http://localhost:8080/teachers
-- H2 Console: http://localhost:8080/h2-console
+Após iniciar a aplicação, você pode acessá-la em:
+- Página principal: http://localhost:8080
+- Página de alunos: http://localhost:8080/students
+- Página de professores: http://localhost:8080/teachers
 
-For the H2 console, use the JDBC URL: `jdbc:h2:mem:testdb`
+### API Endpoints
 
-## Project Structure
+A aplicação também disponibiliza endpoints RESTful para integração com outras aplicações:
 
-- `entity/` - JPA entities for Student and Teacher
-- `repository/` - Data access layer interfaces
-- `service/` - Business logic layer
-- `controller/` - Web controllers
-- `templates/` - Thymeleaf templates with Bootstrap
+#### Estudantes
+- `GET /api/students` - Listar todos os estudantes
+- `GET /api/students/{id}` - Obter detalhes de um estudante específico
+- `POST /api/students` - Criar um novo estudante
+- `PUT /api/students/{id}` - Atualizar informações de um estudante
+- `DELETE /api/students/{id}` - Excluir um estudante
 
-## Educational Value
+#### Professores
+- `GET /api/teachers` - Listar todos os professores
+- `GET /api/teachers/{id}` - Obter detalhes de um professor específico
+- `POST /api/teachers` - Criar um novo professor
+- `PUT /api/teachers/{id}` - Atualizar informações de um professor
+- `DELETE /api/teachers/{id}` - Excluir um professor
 
-This project demonstrates:
-- Basic CRUD operations
-- MVC architecture
-- Spring Boot fundamentals
-- JPA/Hibernate usage
-- Dependency injection
-- RESTful API design
-- Database integration
-- Frontend templating with Thymeleaf
+## Estrutura do Projeto
+
+- `entity/` - Entidades MongoDB para Aluno e Professor
+- `repository/` - Interfaces da camada de acesso a dados
+- `service/` - Camada de lógica de negócios
+- `controller/` - Controladores web
+- `templates/` - Templates Thymeleaf com Bootstrap
+
+## Valor Educacional
+
+Este projeto demonstra:
+- Operações CRUD básicas
+- Arquitetura MVC
+- Fundamentos do Spring Boot
+- Uso do Spring Data MongoDB
+- Injeção de dependência
+- Design de API RESTful
+- Integração com banco de dados NoSQL
+- Template frontend com Thymeleaf

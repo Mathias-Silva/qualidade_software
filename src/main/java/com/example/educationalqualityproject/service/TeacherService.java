@@ -18,7 +18,7 @@ public class TeacherService {
         return teacherRepository.findAll();
     }
 
-    public Optional<Teacher> getTeacherById(Long id) {
+    public Optional<Teacher> getTeacherById(String id) {
         return teacherRepository.findById(id);
     }
 
@@ -26,7 +26,11 @@ public class TeacherService {
         return teacherRepository.save(teacher);
     }
 
-    public void deleteTeacher(Long id) {
+    public void deleteTeacher(String id) {
         teacherRepository.deleteById(id);
+    }
+
+    public boolean existsByEmail(String email) {
+        return teacherRepository.existsByEmail(email);
     }
 }

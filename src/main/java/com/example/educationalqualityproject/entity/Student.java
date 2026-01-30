@@ -1,36 +1,40 @@
 package com.example.educationalqualityproject.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import java.time.LocalDateTime;
 
-@Entity
+@Document(collection = "students")
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
+    private String id;
+
     private String name;
     private String email;
     private String registrationNumber;
-    
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
     // Constructors
-    public Student() {}
-    
+    public Student() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
     public Student(String name, String email, String registrationNumber) {
+        this();
         this.name = name;
         this.email = email;
         this.registrationNumber = registrationNumber;
     }
-    
+
     // Getters and setters
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -40,6 +44,7 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public String getEmail() {
@@ -48,6 +53,7 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public String getRegistrationNumber() {
@@ -56,5 +62,22 @@ public class Student {
 
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
