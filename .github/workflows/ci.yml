@@ -6,7 +6,6 @@ on:
       - "**"  # Dispara em qualquer commit feito em qualquer branch
 
 jobs:
-  build-and-test:
   build:
     runs-on: ubuntu-latest
 
@@ -36,11 +35,19 @@ jobs:
     services:
       mongodb:
         image: mongo:8
-@@ -26,5 +49,11 @@ jobs:
+        ports:
+          - 27017:27017
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
           distribution: "temurin"
           cache: maven
 
-      - name: Build and test
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
