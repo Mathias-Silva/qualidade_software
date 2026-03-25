@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - "**"  # Dispara em qualquer commit feito em qualquer branch
+      - "**"
 
 jobs:
   build:
@@ -19,8 +19,12 @@ jobs:
           distribution: "temurin"
           cache: maven
 
-      - name: Build
-        run: ./mvnw package -DskipTests
+      - name: Grant execute permission for mvnw
+        run: chmod +x mvnw
+
+      - name: Build with Maven
+        # Adicionada a propriedade que estava causando o erro
+        run: ./mvnw package -DskipTests -Dmaven.multiModuleProjectDirectory=$GITHUB_WORKSPACE
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -48,11 +52,12 @@ jobs:
           distribution: "temurin"
           cache: maven
 
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: app-jar
-          path: target/
+      - name: Grant execute permission for mvnw
+        run: chmod +x mvnw
 
-      - name: Test
-        run: ./mvnw test
+      - name: Run Tests
+        # Adicionada a propriedade aqui também para evitar o erro no step de teste
+        run: ./mvnw test -Dmaven.multiModuleProjectDirectory=$GITHUB_WORKSPACE
+        env:
+          # Exemplo caso seu teste precise de uma URI do Mongo específica
+          SPRING_DATA_MONGODB_URI: mongodb://localhost:27017/testdb
