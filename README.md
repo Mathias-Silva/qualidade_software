@@ -1,4 +1,5 @@
 # Projeto de Qualidade Educacional
+#teste ci
 
 Este é um projeto educacional em Java usando Spring Boot e Maven para ensinar conceitos de qualidade aos alunos. O projeto implementa um sistema simples de cadastro de alunos e professores com uma interface web básica.
 
